@@ -88,7 +88,7 @@ def count_antinodes(antinodes):
 def get_antinodes_2(types):
     """
     iterate through each node_type, each pair of distinct nodes of that type
-    compute the corresponding antinode and add to antinode list
+    compute the corresponding antinodes and add to antinode list
     """
     antinodes = set()
     for node_type in types.keys():
@@ -100,6 +100,12 @@ def get_antinodes_2(types):
 
 
 def add_antinodes(node_a, node_b, antinode_set):
+    """
+    keep displacing the current antinode pos by the
+    distance between a and b, until this takes you out of
+    bounds.
+    start with no offset to include node b.
+    """
     x, y = man_dist(node_a, node_b)
     antinode_pos = node_b
     while in_bounds(antinode_pos):
