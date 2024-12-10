@@ -49,12 +49,10 @@ def get_antinodes_1(types):
     """
     antinodes = set()
     for node_type in types.keys():
-        # current_antinodes = set()
         for node_a in types[node_type]:
             for node_b in types[node_type]:
                 if node_a is not node_b:
                     add_antinode(node_a, node_b, antinodes)
-        # antinodes.append(current_antinodes)
     return antinodes
 
 
