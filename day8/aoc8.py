@@ -5,12 +5,15 @@ def get_input(path):
         return grid
 
 
-def phase_1():
+def solve():
     types = get_node_types()
     get_node_positions(types)
-    antinodes = get_antinodes(types)
-    res = count_antinodes(antinodes)
-    print(res)
+    antinodes_1 = get_antinodes_1(types)
+    res = count_antinodes(antinodes_1)
+    print(f"Phase 1: {res}")
+    antinodes_2 = get_antinodes_2(types)
+    res = count_antinodes(antinodes_2)
+    print(f"Phase 2: {res}")
 
 
 def get_node_types():
@@ -39,7 +42,7 @@ def get_node_positions(types):
                 types[elem].add((x, y))
 
 
-def get_antinodes(types):
+def get_antinodes_1(types):
     """
     iterate through each node_type, each pair of distinct nodes of that type
     compute the corresponding antinode and add to antinode list
@@ -82,7 +85,28 @@ def count_antinodes(antinodes):
     return len(antinodes)
 
 
+def get_antinodes_2(types):
+    """
+    iterate through each node_type, each pair of distinct nodes of that type
+    compute the corresponding antinode and add to antinode list
+    """
+    antinodes = set()
+    for node_type in types.keys():
+        for node_a in types[node_type]:
+            for node_b in types[node_type]:
+                if node_a is not node_b:
+                    add_antinodes(node_a, node_b, antinodes)
+    return antinodes
+
+
+def add_antinodes(node_a, node_b, antinode_set):
+    x, y = man_dist(node_a, node_b)
+    antinode_pos = node_b
+    while in_bounds(antinode_pos):
+        antinode_set.add(antinode_pos)
+        antinode_pos = antinode_pos[0] + x, antinode_pos[1] + y
+
+
 if __name__ == "__main__":
     grid = get_input("input.txt")
-    phase_1()
-
+    solve()
