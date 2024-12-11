@@ -11,9 +11,9 @@ def convert_filesystem(filesys):
     new_sys = []
     for id, ch in enumerate(filesys):
         if id % 2 == 0:
-            new_sys.extend([str(id // 2)] * int(ch))
+            new_sys += [str(id // 2)] * int(ch)
         else:
-            new_sys.extend(["."] * int(ch))
+            new_sys += ["."] * int(ch)
     return new_sys
 
 
@@ -110,4 +110,4 @@ if __name__ == "__main__":
     filesystem = get_input("input.txt")
     filesystem = convert_filesystem(filesystem)
     phase_1(filesystem)
-    phase_2(filesystem)
+    # phase_2(filesystem)
