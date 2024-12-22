@@ -4,31 +4,35 @@ def get_input(path):
         return [int(s) for s in stones]
 
 
-def update(stones):
-    new_stones = []
-    for s in stones:
-        if s == 0:
-            new_stones.append(1)
-        elif len(str(s)) % 2 == 0:
-            new_stones.extend(rule2(s))
-        else:
-            new_stones.append(s * 2024)
-    return new_stones
+def memoize(func):
+    cache = {}
+
+    def wrapper(*args):
+        if args not in cache:
+            cache[args] = func(*args)
+        return cache[args]
+
+    return wrapper
 
 
-def rule2(stone):
-    string_stone = str(stone)
-    length = len(string_stone) // 2
-    left, right = int(string_stone[:length]), int(string_stone[length:])
-    return left, right
+def solve(array, max_depth):
+    return sum(map(lambda x: rec(x, max_depth), array))
+
+
+@memoize
+def rec(val, depth):
+    if depth == 0:
+        return 1
+    if val == 0:
+        return rec(1, depth - 1)
+    length = len(str(val))
+    if length % 2 == 0:
+        left, right = int(str(val)[: length // 2]), int(str(val)[length // 2 :])
+        return rec(left, depth - 1) + rec(right, depth - 1)
+    return rec(val * 2024, depth - 1)
 
 
 if __name__ == "__main__":
-    stones = get_input("test.txt")
-    stones1 = stones[:]
-    for _ in range(25):
-        stones1 = update(stones1)
-    print(f"Phase 1: {len(stones1)}")
-    for _ in range(75):
-        stones = update(stones)
-    print(f"Phase 2: {len(stones)}")
+    stones = get_input("input.txt")
+    print(f"Phase 1, recursive: {solve(stones, 25)}")
+    print(f"Phase 2, recursive: {solve(stones, 75)}")
