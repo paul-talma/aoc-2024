@@ -1,7 +1,5 @@
-#include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <iterator>
 #include <ostream>
 #include <string>
 #include <type_traits>
@@ -19,6 +17,8 @@ struct Position {
   Position(int x_val, int y_val) : x(x_val), y(y_val) {}
 };
 
+void Clear() { std::cout << "\033[2J\033[H"; }
+
 std::pair<Map, Directions> mapAndDirections(std::string path) {
   Map map;
   Directions dirs;
@@ -29,6 +29,7 @@ std::pair<Map, Directions> mapAndDirections(std::string path) {
     while (std::getline(input, line)) {
       if (line.empty()) {
         processingMap = false;
+        std::getline(input, line);
       }
       std::vector<char> currLine;
       for (char ch : line) {
@@ -78,9 +79,10 @@ int numMoves(Map &map, Position pos, Direction dir) {
 Position shiftUp(Map &map, Position pos, int moves) {
   int x = pos.x;
   int y = pos.y;
-  for (int i = moves; i >= 0; i--) {
+  for (int i = moves; i > 0; i--) {
     map[y - i][x] = map[y - (i - 1)][x];
   }
+  map[y][x] = '.';
   return Position(x, y - 1);
 }
 
@@ -90,6 +92,7 @@ Position shiftDown(Map &map, Position pos, int moves) {
   for (int i = moves; i >= 0; i--) {
     map[y + i][x] = map[y + (i - 1)][x];
   }
+  map[y][x] = '.';
   return Position(x, y + 1);
 }
 
@@ -99,6 +102,7 @@ Position shiftLeft(Map &map, Position pos, int moves) {
   for (int i = moves; i >= 0; i--) {
     map[y][x - i] = map[y][x - (i - 1)];
   }
+  map[y][x] = '.';
   return Position(x - 1, y);
 }
 
@@ -108,11 +112,15 @@ Position shiftRight(Map &map, Position pos, int moves) {
   for (int i = moves; i >= 0; i--) {
     map[y][x + i] = map[y][x + (i - 1)];
   }
+  map[y][x] = '.';
   return Position(x + 1, y);
 }
 
 Position updateMap(Map &map, Position pos, Direction dir) {
   int moves = numMoves(map, pos, dir);
+  if (moves == 0) {
+    return pos;
+  }
   if (dir == '^') {
     return shiftUp(map, pos, moves);
   } else if (dir == '>') {
@@ -134,8 +142,9 @@ void printMap(Map &map) {
 }
 
 Position getRobotPos(Map &map) {
-  int x = 0, y = 0;
+  int y = 0;
   for (std::vector<char> row : map) {
+    int x = 0;
     for (char ch : row) {
       if (ch == '@') {
         return Position(x, y);
@@ -150,14 +159,35 @@ void computeFinalMap(Map &map, Directions dirs) {
   Position currPos = getRobotPos(map);
   for (Direction dir : dirs) {
     currPos = updateMap(map, currPos, dir);
+    std::cout << "Direction: " << dir << std::endl;
+    std::cout << std::endl;
+    printMap(map);
   }
 }
 
+int coordinate(int x, int y) { return 100 * y + x; }
+
+int coordinateSum(Map &map) {
+  int sum = 0;
+  int y = 0;
+  for (std::vector<char> row : map) {
+    int x = 0;
+    for (char ch : row) {
+      if (map[y][x] == 'O') {
+        sum += coordinate(x, y);
+      }
+      x++;
+    }
+    y++;
+  }
+  return sum;
+}
+
 int main() {
-  std::string path = "test.txt";
+  std::string path = "test2.txt";
   std::pair<Map, Directions> mAndD = mapAndDirections(path);
   Map map = mAndD.first;
   Directions dirs = mAndD.second;
   computeFinalMap(map, dirs);
-  printMap(map);
+  std::cout << "Sum of coordinates: " << coordinateSum(map) << std::endl;
 }
