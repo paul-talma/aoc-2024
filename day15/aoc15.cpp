@@ -17,8 +17,6 @@ struct Position {
   Position(int x_val, int y_val) : x(x_val), y(y_val) {}
 };
 
-void Clear() { std::cout << "\033[2J\033[H"; }
-
 std::pair<Map, Directions> mapAndDirections(std::string path) {
   Map map;
   Directions dirs;
@@ -38,7 +36,9 @@ std::pair<Map, Directions> mapAndDirections(std::string path) {
       if (processingMap) {
         map.push_back(currLine);
       } else {
-        dirs = currLine;
+        for (char ch : currLine) {
+          dirs.push_back(ch);
+        }
       }
     }
     return {map, dirs};
@@ -159,9 +159,6 @@ void computeFinalMap(Map &map, Directions dirs) {
   Position currPos = getRobotPos(map);
   for (Direction dir : dirs) {
     currPos = updateMap(map, currPos, dir);
-    std::cout << "Direction: " << dir << std::endl;
-    std::cout << std::endl;
-    printMap(map);
   }
 }
 
@@ -184,7 +181,7 @@ int coordinateSum(Map &map) {
 }
 
 int main() {
-  std::string path = "test2.txt";
+  std::string path = "input.txt";
   std::pair<Map, Directions> mAndD = mapAndDirections(path);
   Map map = mAndD.first;
   Directions dirs = mAndD.second;
