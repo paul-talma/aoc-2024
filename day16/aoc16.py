@@ -3,11 +3,14 @@ from queue import PriorityQueue
 L = ("L", 1000)
 R = ("R", 1000)
 F = ("F", 1)
+
 actions = [L, R, F]
+
 N = (-1, 0)
 E = (0, 1)
 S = (1, 0)
 W = (0, -1)
+
 turns = {
     (N, L): W,
     (N, R): E,
@@ -83,7 +86,6 @@ def UCS(start_state, goal_pos):
     visited = set()
     while pq:
         curr_cost, curr_state = pq.get()
-        print(curr_state)
         visited.add((curr_state.x, curr_state.y))
         for action in actions:
             if valid(curr_state, action):

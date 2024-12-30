@@ -1,0 +1,74 @@
+In file included from aoc16.cpp:1:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/fstream:185:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__locale:15:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/string:520:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__functional_base:26:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/utility:221:
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__utility/pair.h:339:22: error: invalid operands to binary expression ('const Dir' and 'const Dir')
+  339 |     return __x.first < __y.first || (!(__y.first < __x.first) && __x.second < __y.second);
+      |            ~~~~~~~~~ ^ ~~~~~~~~~
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__functional/operations.h:487:21: note: in instantiation of function template specialization 'std::operator<<Dir, Action>' requested here
+  487 |         {return __x < __y;}
+      |                     ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/map:537:17: note: in instantiation of member function 'std::less<std::pair<Dir, Action>>::operator()' requested here
+  537 |         {return static_cast<const _Compare&>(*this)(__x, __y.__get_value().first);}
+      |                 ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__tree:2023:28: note: in instantiation of member function 'std::__map_value_compare<std::pair<Dir, Action>, std::__value_type<std::pair<Dir, Action>, Dir>, std::less<std::pair<Dir, Action>>>::operator()' requested here
+ 2023 |     if (__hint == end() || value_comp()(__v, *__hint))  // check before
+      |                            ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__tree:2114:36: note: in instantiation of function template specialization 'std::__tree<std::__value_type<std::pair<Dir, Action>, Dir>, std::__map_value_compare<std::pair<Dir, Action>, std::__value_type<std::pair<Dir, Action>, Dir>, std::less<std::pair<Dir, Action>>>, std::allocator<std::__value_type<std::pair<Dir, Action>, Dir>>>::__find_equal<std::pair<Dir, Action>>' requested here
+ 2114 |     __node_base_pointer& __child = __find_equal(__p, __parent, __dummy, __k);
+      |                                    ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__tree:1257:16: note: in instantiation of function template specialization 'std::__tree<std::__value_type<std::pair<Dir, Action>, Dir>, std::__map_value_compare<std::pair<Dir, Action>, std::__value_type<std::pair<Dir, Action>, Dir>, std::less<std::pair<Dir, Action>>>, std::allocator<std::__value_type<std::pair<Dir, Action>, Dir>>>::__emplace_hint_unique_key_args<std::pair<Dir, Action>, const std::pair<const std::pair<Dir, Action>, Dir> &>' requested here
+ 1257 |         return __emplace_hint_unique_key_args(__p, _NodeTypes::__get_key(__v), __v).first;
+      |                ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/map:1205:29: note: in instantiation of member function 'std::__tree<std::__value_type<std::pair<Dir, Action>, Dir>, std::__map_value_compare<std::pair<Dir, Action>, std::__value_type<std::pair<Dir, Action>, Dir>, std::less<std::pair<Dir, Action>>>, std::allocator<std::__value_type<std::pair<Dir, Action>, Dir>>>::__insert_unique' requested here
+ 1205 |             {return __tree_.__insert_unique(__p.__i_, __v);}
+      |                             ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/map:1226:17: note: in instantiation of member function 'std::map<std::pair<Dir, Action>, Dir>::insert' requested here
+ 1226 |                 insert(__e.__i_, *__f);
+      |                 ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/map:1076:13: note: in instantiation of function template specialization 'std::map<std::pair<Dir, Action>, Dir>::insert<const std::pair<const std::pair<Dir, Action>, Dir> *>' requested here
+ 1076 |             insert(__il.begin(), __il.end());
+      |             ^
+aoc16.cpp:30:47: note: in instantiation of member function 'std::map<std::pair<Dir, Action>, Dir>::map' requested here
+   30 | std::map<std::pair<Dir, Action>, Dir> turns = {
+      |                                               ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__utility/pair.h:337:1: note: candidate template ignored: could not match 'const pair<_T1, _T2>' against 'const Dir'
+  337 | operator< (const pair<_T1,_T2>& __x, const pair<_T1,_T2>& __y)
+      | ^
+
+
+
+
+
+
+
+
+
+
+
+In file included from aoc16.cpp:1:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/fstream:185:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__locale:15:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/string:520:
+In file included from /Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__functional_base:16:
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__functional/operations.h:487:21: error: invalid operands to binary expression ('const Pos' and 'const Pos')
+  487 |         {return __x < __y;}
+      |                 ~~~ ^ ~~~
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__tree:1977:17: note: in instantiation of member function 'std::less<Pos>::operator()' requested here
+ 1977 |             if (value_comp()(__v, __nd->__value_))
+      |                 ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__tree:2093:36: note: in instantiation of function template specialization 'std::__tree<Pos, std::less<Pos>, std::allocator<Pos>>::__find_equal<Pos>' requested here
+ 2093 |     __node_base_pointer& __child = __find_equal(__parent, __k);
+      |                                    ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/__tree:1252:16: note: in instantiation of function template specialization 'std::__tree<Pos, std::less<Pos>, std::allocator<Pos>>::__emplace_unique_key_args<Pos, const Pos &>' requested here
+ 1252 |         return __emplace_unique_key_args(_NodeTypes::__get_key(__v), __v);
+      |                ^
+/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1/set:673:25: note: in instantiation of member function 'std::__tree<Pos, std::less<Pos>, std::allocator<Pos>>::__insert_unique' requested here
+  673 |         {return __tree_.__insert_unique(__v);}
+      |                         ^
+aoc16.cpp:94:13: note: in instantiation of member function 'std::set<Pos>::insert' requested here
+   94 |     visited.insert(state.pos);
+      |             ^
+2 errors generated.
